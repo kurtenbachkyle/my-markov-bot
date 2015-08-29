@@ -1,14 +1,12 @@
 # markov-bot
 
-A Clojure library designed to ... well, that part is up to you.
+My implementation of Carin Meier's Markov Chain Twitter bot.
 
-## Usage
-
-FIXME
+https://howistart.org/posts/clojure/1
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Kyle Kurtenbach
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
