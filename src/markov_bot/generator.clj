@@ -1,6 +1,7 @@
 (ns markov-bot.generator
   (:require [clojure.string :as str])
-  (:require [clojure.set :as c-set]))
+  (:require [clojure.set :as c-set])
+  (:require [clojure.java.io :as io]))
 
 (defn word-chain [word-transitions]
   (reduce 
@@ -39,3 +40,14 @@
     (chain->text 
       (walk-chain prefix chain prefix))))
 
+(defn process-file [fname]
+  (text->word-chain (slurp (io/resource fname))))
+
+(defn end-at-last-punctuation [text]
+(let [trimmed-to-last-punct (apply str (re-seq #"[\s\w]+[^.!?,]*[.!?,]" text))
+      trimmed-to-last-word (apply str (re-seq #".*[^a-zA-Z]+" text))
+      result-text (if (empty? trimmed-to-last-punct)
+                    trimmed-to-last-word
+                    trimmed-to-last-punct)
+      cleaned-text (clojure.string/replace result-text #"[,| ]$" ".")]
+  (clojure.string/replace cleaned-text #"\"" "'")))
