@@ -1,11 +1,12 @@
 (ns markov-bot.generator
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str])
+  (:require [clojure.set :as c-set]))
 
 (defn word-chain [word-transitions]
   (reduce 
     (fn [r t] 
       (merge-with 
-        clojure.set/union r 
+        c-set/union r 
         (let [[a b c] t] 
           {[a b] (if c #{c} #{})}))) 
     {} word-transitions))
@@ -26,3 +27,5 @@
       :else (let [suffix (first (shuffle suffixes))
                   new-prefix [(last prefix) suffix]]
               (recur new-prefix chain (conj result suffix))))))
+
+
