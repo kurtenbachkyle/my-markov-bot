@@ -37,8 +37,8 @@
       (let [prefix ["the" "Pobble"]]
         (is (= ["the" "Pobble" "who"]
                (walk-chain prefix chain prefix)))))
-        (testing "multiple choices"
-    (with-redefs [shuffle (fn [c] c)]
-      (let [prefix ["And" "the"]]
-        (is (= ["And" "the" "Pobble" "who"]
-               (walk-chain prefix chain prefix))))))))
+    (testing "multiple choices"
+      (with-redefs [shuffle (fn [c] c)]
+        (let [prefix ["And" "the"]]
+          (is (= ["And" "the" "Pobble" "who"]
+                 (walk-chain prefix chain prefix))))))))

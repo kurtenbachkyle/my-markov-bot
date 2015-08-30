@@ -24,7 +24,7 @@
   (let [suffixes (get chain prefix)]
     (cond 
       (empty? suffixes) result
-      :else (let [suffix (first (shuffle suffixes))
+      :else (let [suffix (last (shuffle suffixes))
                   new-prefix [(last prefix) suffix]]
               (recur new-prefix chain (conj result suffix))))))
 
